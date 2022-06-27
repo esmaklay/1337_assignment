@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GetEmployees from '../data/GetEmployees';
+import { Card } from 'react-bootstrap';
+import './employeesList.css';
 
 function EmployeesList(props) {
 	const [ employees, setEmployees ] = useState([]);
@@ -21,13 +23,17 @@ function EmployeesList(props) {
 		return <p>Loading employees...</p>;
 	}
 
-	return sortedEmployees().map((employ) => {
+	return sortedEmployees().map((employee) => {
 		return (
-			<div>
-				<h1 key={employ.email}>
-					{employ.name} {employ.office}
-				</h1>
-			</div>
+			<>
+				<Card border="secondary" key={employee.email}>
+					<Card.Img variant="top" src={employee.imagePortraitUrl} />
+					<Card.Body>
+						<Card.Title>{employee.name}</Card.Title>
+						<Card.Text>{employee.office}</Card.Text>
+					</Card.Body>
+				</Card>
+			</>
 		);
 	});
 }
